@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="layout_margin">16dp</dimen>
+    <dimen name="layout_top">48dp</dimen>
+    <dimen name="layout_wide">16dp</dimen>
+    <dimen name="box_text_size">18sp</dimen>
+    <dimen name="edit_text_size">18sp</dimen>
+    <dimen name="edit_text_size_extra">32sp</dimen>
+</resources>

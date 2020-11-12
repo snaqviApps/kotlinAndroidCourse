@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ShoeStore</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email">Email: </string>
+    <string name="email_hint_text">Email </string>
+    <string name="password">Password: </string>
+    <string name="password_hint_text">Password </string>
+    <string name="bu_new_login_label">New login</string>
+    <string name="bu_existing_login_label">Existing user Login</string>
+    <string name="tv_text_welcom">WELCOME TO LOGIN SCREEN</string>
+    <string name="tv_text_welcome_two">this is welcome screen info placeholder</string>
+    <string name="bu_welcome_label">To Instructions</string>
 </resources>
