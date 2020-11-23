@@ -1,12 +1,12 @@
 package com.udacity.shoestore
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.udacity.shoestore.databinding.FragmentMainBinding
 import kotlinx.android.synthetic.main.fragment_main.*
 
@@ -34,6 +34,7 @@ class MainFragment : Fragment() {
          *
          */
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -50,13 +51,29 @@ class MainFragment : Fragment() {
     private fun sendToWelcome(view: View?) {
         when(view?.id){
             R.id.buExistLogin -> binding.buExistLogin.setOnClickListener(
-                    Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)    //    3rd approach
+                    Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)
             )
-
             R.id.buNewLogin -> binding.buNewLogin.setOnClickListener(
-                    Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)    //    3rd approach
+                    Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)
             )
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+       super.onCreateOptionsMenu(menu!!, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+
+    }
+
+//        override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+        return NavigationUI.onNavDestinationSelected(item,
+            requireView().findNavController())
+                || super.onOptionsItemSelected(item)
+
+    }
+
 
 }

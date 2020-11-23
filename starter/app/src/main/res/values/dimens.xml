@@ -4,7 +4,9 @@
     <dimen name="layout_margin">16dp</dimen>
     <dimen name="layout_top">48dp</dimen>
     <dimen name="layout_wide">16dp</dimen>
-    <dimen name="box_text_size">18sp</dimen>
+    <dimen name="box_text_size">14sp</dimen>
     <dimen name="edit_text_size">18sp</dimen>
     <dimen name="edit_text_size_extra">32sp</dimen>
+    <dimen name="layout_scroll">8dp</dimen>
+    <dimen name="bar_height">24dp</dimen>
 </resources>
