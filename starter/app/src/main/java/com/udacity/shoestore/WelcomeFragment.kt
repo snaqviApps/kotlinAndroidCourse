@@ -19,6 +19,7 @@ class WelcomeFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+        Timber.d("WelcomeFragment: onCreateView() ")
         val bindingWelcome: FragmentWelcomeBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_welcome, container, false)
 

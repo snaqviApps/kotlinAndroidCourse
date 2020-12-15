@@ -24,15 +24,15 @@ class MainFragment : Fragment() {
 
         /**
          * One - click solution
-         * ***
+         * **
+         * */
             binding.buExistLogin.setOnClickListener(
                     Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)    //    3rd approach
             )
             binding.buNewLogin.setOnClickListener(
                     Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)    //    3rd approach
             )
-         *
-         */
+
 
         setHasOptionsMenu(true)
         return binding.root
@@ -41,13 +41,13 @@ class MainFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        clickableViews = listOf(buNewLogin, buExistLogin)
-        for (item in clickableViews) {
-            item.setOnClickListener { sendToWelcome(it) }
-        }
+//        clickableViews = listOf(buNewLogin, buExistLogin)
+//        for (item in clickableViews) {
+//            item.setOnClickListener { sendToWelcome(it) }
+//        }
     }
 
-    /** Two - click approach */
+    /** Two - click approach
     private fun sendToWelcome(view: View?) {
         when(view?.id){
             R.id.buExistLogin -> binding.buExistLogin.setOnClickListener(
@@ -57,7 +57,7 @@ class MainFragment : Fragment() {
                     Navigation.createNavigateOnClickListener(R.id.action_mainFragment_to_welcomeFragment)
             )
         }
-    }
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
        super.onCreateOptionsMenu(menu!!, inflater)
