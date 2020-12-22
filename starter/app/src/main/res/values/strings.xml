@@ -21,4 +21,6 @@
     <string name="bu_instructions_label">Open Shoe List</string>
     <string name="FAB_CONTENT">DETAILS</string>
     <string name="menu_logout_text">Log out</string>
+    <string name="buttonSave">Save</string>
+    <string name="buCancel">cancel</string>
 </resources>
