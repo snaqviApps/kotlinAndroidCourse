@@ -79,7 +79,7 @@
             android:layout_height="37dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@={shoeStoreViewModel.shoeData.get(0).toString()}"
+            android:text="@={shoeStoreViewModel.shoeData.name}"
             app:layout_constraintBottom_toTopOf="@+id/etCompany"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvShoeName"
@@ -94,7 +94,7 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={shoeStoreViewModel.shoeData}"
+            android:text="@={shoeStoreViewModel.shoeData.company}"
             app:layout_constraintBottom_toTopOf="@+id/etShoeSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCompany"
@@ -108,12 +108,14 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="number"
-            android:text="@={ConverterUtil.toDouble(shoeStoreViewModel.shoeData.size)}"
+
+            android:text="@string/dummyShoeSize"
             app:layout_constraintBottom_toTopOf="@+id/etDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvShoeSize"
             app:layout_constraintTop_toBottomOf="@+id/etCompany" />
 
+<!--        android:text="@={ConverterUtil.toDouble(4.5)}"-->
 
         <EditText
             android:id="@+id/etDescription"
@@ -124,7 +126,7 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={shoeStoreViewModel.shoeData.}"
+            android:text="@={shoeStoreViewModel.shoeData.description}"
             app:layout_constraintBottom_toBottomOf="@+id/tvDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvDescription"

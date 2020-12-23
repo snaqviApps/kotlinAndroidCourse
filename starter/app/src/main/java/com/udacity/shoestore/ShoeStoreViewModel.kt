@@ -13,16 +13,16 @@ class ShoeStoreViewModel: ViewModel() {
 
 //     Shoe - model internal
     private val shoesList = mutableListOf<Shoe>()
-    private val _shoeData = MutableLiveData<List<Shoe>>()
-    val shoeData : LiveData<List<Shoe>>
-        get() {
-            return _shoeData
-        }
-//    private val _shoeData = MutableLiveData<Shoe>()
-//    val shoeData : LiveData<Shoe>
+//    private val _shoeData = MutableLiveData<List<Shoe>>()
+//    val shoeData : LiveData<List<Shoe>>
 //        get() {
 //            return _shoeData
 //        }
+    private val _shoeData = MutableLiveData<Shoe>()
+    val shoeData : LiveData<Shoe>
+        get() {
+            return _shoeData
+        }
 
     private val _eventSave = MutableLiveData<Boolean>()
     val eventSave: LiveData<Boolean>
@@ -52,7 +52,7 @@ class ShoeStoreViewModel: ViewModel() {
     //sample method to add shoe
     fun addShoe(shoe: Shoe) {
         shoesList.add(shoe)
-        _shoeData.value = shoesList
+//        _shoeData.value = shoesList
     }
 
     fun onSave() {
