@@ -5,60 +5,81 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.InverseMethod
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 import com.udacity.shoestore.models.Shoe
 
-
 class ShoeDetailFragment : Fragment() {
 
-    private val viewModelDetails: ShoeStoreViewModel by activityViewModels()
+    private var shoeObj: Shoe? = null
 
+    private val viewModelDetails: ShoeStoreViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding: FragmentShoeDetailBinding = DataBindingUtil.inflate(
+        val bindingDetails: FragmentShoeDetailBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_shoe_detail,
             container,
             false
         )
 
-        binding.shoeStoreViewModel = viewModelDetails
+        bindingDetails.shoeStoreViewModel = viewModelDetails
         /**  apparently the MainActivity is right place, but put here as well */
-        binding.lifecycleOwner = this
+        bindingDetails.lifecycleOwner = this
 
-        val shoeObj = Shoe(
-            binding.etShoeName.text.toString(),
-            binding.etShoeSize.text.toString().toDouble(),
-            binding.etCompany.text.toString(),
-            binding.etDescription.text.toString(),
-//                null
+        viewModelDetails.shoeData.observe(viewLifecycleOwner, Observer { shoe ->
+//        viewModelDetails.shoeData.observe(requireActivity(), Observer{
 
-        )
-        viewModelDetails.addShoe(shoeObj)
+            // update UI in Fragments
+            shoeObj = Shoe(
 
-        viewModelDetails.eventSave.observe(viewLifecycleOwner, { saveNewShoe ->
+//                bindingDetails.etShoeName.text.toString(),
+                shoe.name,
+                when {
+                    bindingDetails.etShoeSize.text.toString() == "" -> 0.0
+                    else -> bindingDetails.etShoeSize.text.toString()
+                } as Double,
+                shoe.company,
+                shoe.description,
+                listOf("Hi", "One", "two")
+            )
+            viewModelDetails.addShoe(shoeObj!!)
+        })
+//        viewModelDetails.addShoe(shoeObj)
+
+
+        val boolSave = viewModelDetails.eventSave.value
+        bindingDetails.buSave.setOnClickListener {v ->
+            if(v != null){
+                Toast.makeText(v.context, "Hi from onSave Method", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+//        viewModelDetails.eventSave.observe(viewLifecycleOwner, { saveNewShoe ->
+        viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer{ saveNewShoe ->
             if (saveNewShoe) {
-                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment(shoeObj))
                 viewModelDetails.onSaveComplete()
             }
         })
-        viewModelDetails.eventCancel.observe(viewLifecycleOwner, { cancelSaving ->
+        viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, { cancelSaving ->
+//        viewModelDetails.eventCancel.observe(requireActivity(), { cancelSaving ->
             if (cancelSaving) {
-                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment(shoeObj))
                 viewModelDetails.onCancelComplete()
             }
         })
 
-        return binding.root
+        return bindingDetails.root
     }
 
 

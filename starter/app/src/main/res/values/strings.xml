@@ -23,5 +23,4 @@
     <string name="menu_logout_text">Log out</string>
     <string name="buttonSave">Save</string>
     <string name="buCancel">cancel</string>
-    <string name="dummyShoeSize">5.0</string>
 </resources>

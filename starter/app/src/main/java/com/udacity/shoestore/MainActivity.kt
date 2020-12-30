@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         modelActivity.shoeData.observe(this, Observer { shoe ->
             // update UI in Fragments
         })
-        binding.lifecycleOwner = this
+//        binding.lifecycleOwner = this
 
         /** navigation UI (library) getting access to Navigation-Controller    */
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment

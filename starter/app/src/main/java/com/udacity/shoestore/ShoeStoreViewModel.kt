@@ -1,8 +1,5 @@
 package com.udacity.shoestore
 
-import android.view.View
-import android.widget.EditText
-import androidx.databinding.InverseMethod
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +15,7 @@ class ShoeStoreViewModel: ViewModel() {
 //        get() {
 //            return _shoeData
 //        }
+
     private val _shoeData = MutableLiveData<Shoe>()
     val shoeData : LiveData<Shoe>
         get() {
@@ -34,7 +32,8 @@ class ShoeStoreViewModel: ViewModel() {
 
     init {
         Timber.d("ShoeListViewModel created")
-        _eventSave.value = false
+//        _eventSave.value = false
+//        _eventCancel.value = false
     }
 
     override fun onCleared() {
@@ -42,29 +41,22 @@ class ShoeStoreViewModel: ViewModel() {
         Timber.d("ShoeListViewModel destroyed ")
     }
 
-    object ConverterUtil {
-        @InverseMethod("doubleToString")
-        @JvmStatic fun toDouble(eView : EditText, input: Double): String {
-            return input.toString()
-        }
-    }
-
     //sample method to add shoe
     fun addShoe(shoe: Shoe) {
+        _shoeData.value = shoe
         shoesList.add(shoe)
-//        _shoeData.value = shoesList
     }
 
     fun onSave() {
         _eventSave.value = true
     }
 
-    fun onCancel() {
-        _eventCancel.value = true
-    }
-
     fun onSaveComplete() {
         _eventSave.value = false
+    }
+
+    fun onCancel() {
+        _eventCancel.value = true
     }
 
     fun onCancelComplete() {
@@ -72,4 +64,3 @@ class ShoeStoreViewModel: ViewModel() {
     }
 
 }
-
