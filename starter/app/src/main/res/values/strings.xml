@@ -22,5 +22,6 @@
     <string name="FAB_CONTENT">DETAILS</string>
     <string name="menu_logout_text">Log out</string>
     <string name="buttonSave">Save</string>
-    <string name="buCancel">cancel</string>
+    <string name="buttonCancel">cancel</string>
+    <string name="size_format">%f</string>
 </resources>

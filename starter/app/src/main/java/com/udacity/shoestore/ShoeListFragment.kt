@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
@@ -17,33 +19,37 @@ import timber.log.Timber
 
 class ShoeListFragment : Fragment() {
 
-//    private lateinit var viewModel: ShoeListViewModel
+    private val viewModelList: ShoeStoreViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       val binding: FragmentShoeListBinding = DataBindingUtil.inflate(
+       val bindingList: FragmentShoeListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_shoe_list, container, false
        )
 
-        val shoeListFragmentArgs by navArgs<ShoeListFragmentArgs>()
+        Timber.d("called ViewModelProvider()%s", "")
 
-//        if(shoeListFragmentArgs.shoeToListArgs != null){
-//            Toast.makeText(this.context, shoeListFragmentArgs.component1()?.company, Toast.LENGTH_SHORT).show()
-//        }
 
-//        val shoeRcvd = shoeListFragmentArgs.shoeToListArgs!!
-       Timber.d("called ViewModelProvider()%s", "")
-//       viewModel = ViewModelProvider(this).get(ShoeListViewModel::class.java)
+        bindingList.sStoreViewModelList = viewModelList
 
-        binding.buFab.setOnClickListener {           // navigation 1st - method
+        /**  apparently the MainActivity is right place, but put here as well */
+        bindingList.lifecycleOwner = this
+//        bindingList.setLifecycleOwner(this.viewLifecycleOwner)
+
+        viewModelList.shoeData.observe(this.viewLifecycleOwner, Observer { shoeReceived ->
+            if(shoeReceived != null){
+                Timber.d("shoe size received in listFrag is: %s", shoeReceived.size)
+            }
+        })
+
+        bindingList.buFab.setOnClickListener {           // navigation 1st - method
             it.findNavController().navigate(
                 R.id.action_shoeListFragment_to_shoeDetailFragment)
         }
 
-        return binding.root
+        return bindingList.root
     }
-
 
 }

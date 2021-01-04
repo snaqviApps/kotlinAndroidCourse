@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
 import com.udacity.shoestore.models.Shoe
+import timber.log.Timber
 
 class ShoeDetailFragment : Fragment() {
 
@@ -33,7 +33,9 @@ class ShoeDetailFragment : Fragment() {
 
         bindingDetails.shoeStoreViewModel = viewModelDetails
         /**  apparently the MainActivity is right place, but put here as well */
-        bindingDetails.lifecycleOwner = this
+//        bindingDetails.lifecycleOwner = this
+
+        bindingDetails.setLifecycleOwner(this.viewLifecycleOwner)
 
         viewModelDetails.shoeData.observe(viewLifecycleOwner, Observer { shoe ->
 //        viewModelDetails.shoeData.observe(requireActivity(), Observer{
@@ -53,6 +55,7 @@ class ShoeDetailFragment : Fragment() {
             )
             viewModelDetails.addShoe(shoeObj!!)
         })
+        Timber.d("inside detailsFragment")
 //        viewModelDetails.addShoe(shoeObj)
 
 
@@ -63,24 +66,22 @@ class ShoeDetailFragment : Fragment() {
             }
         }
 
-
 //        viewModelDetails.eventSave.observe(viewLifecycleOwner, { saveNewShoe ->
         viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer{ saveNewShoe ->
             if (saveNewShoe) {
-                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment(shoeObj))
+                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
                 viewModelDetails.onSaveComplete()
             }
         })
         viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, { cancelSaving ->
 //        viewModelDetails.eventCancel.observe(requireActivity(), { cancelSaving ->
             if (cancelSaving) {
-                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment(shoeObj))
+                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
                 viewModelDetails.onCancelComplete()
             }
         })
 
         return bindingDetails.root
     }
-
 
 }

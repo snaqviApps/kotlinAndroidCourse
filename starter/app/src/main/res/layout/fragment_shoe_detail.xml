@@ -8,7 +8,6 @@
         <variable
             name="shoeStoreViewModel"
             type="com.udacity.shoestore.ShoeStoreViewModel" />
-
     </data>
 
 
@@ -81,7 +80,7 @@
             android:layout_height="37dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@={shoeStoreViewModel.shoeData.name}"
+            android:text="@{shoeStoreViewModel.shoeData.name}"
             app:layout_constraintBottom_toTopOf="@+id/etCompany"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvShoeName"
@@ -96,7 +95,7 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={shoeStoreViewModel.shoeData.company}"
+            android:text="@{shoeStoreViewModel.shoeData.company}"
             app:layout_constraintBottom_toTopOf="@+id/etShoeSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCompany"
@@ -111,13 +110,13 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="numberDecimal"
-            android:text="@{Converter.toString(shoeStoreViewModel.shoeData.size)}"
+
+            android:text="@{@string/size_format(shoeStoreViewModel.shoeData.size)}"
             app:layout_constraintBottom_toTopOf="@+id/etDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvShoeSize"
             app:layout_constraintTop_toBottomOf="@+id/etCompany" />
-
-<!--        android:text="@={ConverterUtil.toDouble(4.5)}"-->
+        <!--            android:text="@{Converter.toString(shoeStoreViewModel.shoeData.size)}"-->
 
         <EditText
             android:id="@+id/etDescription"
@@ -128,42 +127,40 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@={shoeStoreViewModel.shoeData.description}"
+            android:text="@{shoeStoreViewModel.shoeData.description}"
             app:layout_constraintBottom_toBottomOf="@+id/tvDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvDescription"
             app:layout_constraintTop_toBottomOf="@+id/etShoeSize" />
 
         <Button
-            android:id="@+id/buSave"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:text="@string/buCancel"
-            android:onClick="@{()-> shoeStoreViewModel.onSave()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/buCancel"
-            app:layout_constraintTop_toBottomOf="@+id/etDescription"
-            app:layout_constraintVertical_bias="0.136"/>
-
-        <Button
             android:id="@+id/buCancel"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginStart="@dimen/layout_margin"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
-            android:text="@string/buttonSave"
             android:onClick="@{() -> shoeStoreViewModel.onCancel()}"
-            app:layout_constraintBaseline_toBaselineOf="@+id/buSave"
-            app:layout_constraintEnd_toStartOf="@+id/buSave"
-            app:layout_constraintHorizontal_bias="0.01"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            android:text="@string/buttonCancel"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/buSave"
+            app:layout_constraintTop_toBottomOf="@+id/etDescription"
+            app:layout_constraintVertical_bias="0.13" />
+
+        <Button
+            android:id="@+id/buSave"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:ems="10"
+            android:onClick="@{()-> shoeStoreViewModel.onSave()}"
+            android:text="@string/buttonSave"
+            app:layout_constraintBaseline_toBaselineOf="@+id/buCancel"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
