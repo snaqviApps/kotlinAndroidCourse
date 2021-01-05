@@ -10,17 +10,17 @@ class ShoeStoreViewModel: ViewModel() {
 
 //     Shoe - model internal
     private val shoesList = mutableListOf<Shoe>()
-//    private val _shoeData = MutableLiveData<List<Shoe>>()
-//    val shoeData : LiveData<List<Shoe>>
-//        get() {
-//            return _shoeData
-//        }
-
-    private val _shoeData = MutableLiveData<Shoe>()
-    val shoeData : LiveData<Shoe>
+    private val _shoeData = MutableLiveData<List<Shoe>>()
+    val shoeData : LiveData<List<Shoe>>
         get() {
             return _shoeData
         }
+
+//    private val _shoeData = MutableLiveData<Shoe>()
+//    val shoeData : LiveData<Shoe>
+//        get() {
+//            return _shoeData
+//        }
 
     private val _eventSave = MutableLiveData<Boolean>()
     val eventSave: LiveData<Boolean>
@@ -32,8 +32,6 @@ class ShoeStoreViewModel: ViewModel() {
 
     init {
         Timber.d("ShoeListViewModel created")
-//        _eventSave.value = false
-//        _eventCancel.value = false
     }
 
     override fun onCleared() {
@@ -43,7 +41,7 @@ class ShoeStoreViewModel: ViewModel() {
 
     //sample method to add shoe
     fun addShoe(shoe: Shoe) {
-        _shoeData.value = shoe
+//        _shoeData.value = shoe
         shoesList.add(shoe)
     }
 
