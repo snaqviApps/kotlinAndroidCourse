@@ -19,6 +19,7 @@ import timber.log.Timber
 
 class ShoeListFragment : Fragment() {
 
+    private lateinit var shoeObj: Shoe
     private val viewModelList: ShoeStoreViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -31,15 +32,20 @@ class ShoeListFragment : Fragment() {
 
         Timber.d("called ViewModelProvider()%s", "")
 
-
         bindingList.sStoreViewModelList = viewModelList
 
         /**  apparently the MainActivity is right place, but put here as well */
         bindingList.lifecycleOwner = this
 //        bindingList.setLifecycleOwner(this.viewLifecycleOwner)
 
+        viewModelList.shoeDataList.forEach { newShoe ->
+//            var count = count + 1
+            Timber.d("")
+        }
+
         viewModelList.shoeData.observe(this.viewLifecycleOwner, Observer { shoeReceived ->
             if(shoeReceived != null){
+
                 Timber.d("shoe size received in listFrag is: %s", shoeReceived.size)
             }
         })

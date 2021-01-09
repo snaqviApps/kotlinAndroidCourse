@@ -6,12 +6,12 @@
     <data>
         <import type="com.udacity.shoestore.util.Converter"/>
         <variable
+            name="newShoe"
+            type="com.udacity.shoestore.models.Shoe" />
+        <variable
             name="shoeStoreViewModel"
             type="com.udacity.shoestore.ShoeStoreViewModel" />
     </data>
-
-
-    <!--        <import type="com.udacity.shoestore.ShoeStoreViewModel.ConverterUtil" />-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -80,7 +80,7 @@
             android:layout_height="37dp"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="@{shoeStoreViewModel.shoeData.get().name}"
+            android:text="@={newShoe.name}"
             app:layout_constraintBottom_toTopOf="@+id/etCompany"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvShoeName"
@@ -95,7 +95,7 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@{shoeStoreViewModel.shoeData.get().company}"
+            android:text="@={newShoe.company}"
             app:layout_constraintBottom_toTopOf="@+id/etShoeSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCompany"
@@ -110,13 +110,11 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="numberDecimal"
-
-            android:text="@{@string/size_format(shoeStoreViewModel.shoeData.size)}"
+            android:text="@={Converter.toString(newShoe.size)}"
             app:layout_constraintBottom_toTopOf="@+id/etDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvShoeSize"
             app:layout_constraintTop_toBottomOf="@+id/etCompany" />
-        <!--            android:text="@{Converter.toString(shoeStoreViewModel.shoeData.size)}"-->
 
         <EditText
             android:id="@+id/etDescription"
@@ -127,7 +125,7 @@
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPassword"
-            android:text="@{shoeStoreViewModel.shoeData.get().description}"
+            android:text="@={newShoe.description}"
             app:layout_constraintBottom_toBottomOf="@+id/tvDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvDescription"
@@ -156,7 +154,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:ems="10"
-            android:onClick="@{()-> shoeStoreViewModel.addShoe()}"
+            android:onClick="@{()-> shoeStoreViewModel.addShoe(newShoe)}"
             android:text="@string/buttonSave"
             app:layout_constraintBaseline_toBaselineOf="@+id/buCancel"
             app:layout_constraintStart_toStartOf="parent" />

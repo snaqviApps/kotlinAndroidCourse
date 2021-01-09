@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class ShoeDetailFragment : Fragment() {
 
-    private var shoeObj: Shoe? = null
+    private var shoeObj: Shoe = Shoe("", 0.00, "", "", null)
 
     private val viewModelDetails: ShoeStoreViewModel by activityViewModels()
     override fun onCreateView(
@@ -31,50 +31,22 @@ class ShoeDetailFragment : Fragment() {
             false
         )
 
+        bindingDetails.newShoe = shoeObj
         bindingDetails.shoeStoreViewModel = viewModelDetails
         /**  apparently the MainActivity is right place, but put here as well */
 //        bindingDetails.lifecycleOwner = this
 
-        bindingDetails.setLifecycleOwner(this.viewLifecycleOwner)
+        bindingDetails.lifecycleOwner = this.viewLifecycleOwner
 
-        viewModelDetails.shoeData.observe(viewLifecycleOwner, Observer { shoe ->
-//        viewModelDetails.shoeData.observe(requireActivity(), Observer{
-
-            // update UI in Fragments
-            shoeObj = Shoe(
-
-//                bindingDetails.etShoeName.text.toString(),
-                shoe.name,
-                when {
-                    bindingDetails.etShoeSize.text.toString() == "" -> 0.0
-                    else -> bindingDetails.etShoeSize.text.toString()
-                } as Double,
-                shoe.company,
-                shoe.description,
-                listOf("Hi", "One", "two")
-            )
-            viewModelDetails.addShoe(shoeObj!!)
-        })
         Timber.d("inside detailsFragment")
-//        viewModelDetails.addShoe(shoeObj)
 
-
-        val boolSave = viewModelDetails.eventSave.value
-        bindingDetails.buSave.setOnClickListener {v ->
-            if(v != null){
-                Toast.makeText(v.context, "Hi from onSave Method", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-//        viewModelDetails.eventSave.observe(viewLifecycleOwner, { saveNewShoe ->
-        viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer{ saveNewShoe ->
+        viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer { saveNewShoe ->
             if (saveNewShoe) {
                 findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
                 viewModelDetails.onSaveComplete()
             }
         })
-        viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, { cancelSaving ->
-//        viewModelDetails.eventCancel.observe(requireActivity(), { cancelSaving ->
+        viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, Observer { cancelSaving ->
             if (cancelSaving) {
                 findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
                 viewModelDetails.onCancelComplete()

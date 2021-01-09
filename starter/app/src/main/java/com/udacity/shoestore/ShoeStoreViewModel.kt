@@ -1,5 +1,6 @@
 package com.udacity.shoestore
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,18 +10,18 @@ import timber.log.Timber
 class ShoeStoreViewModel: ViewModel() {
 
 //     Shoe - model internal
-    private val shoesList = mutableListOf<Shoe>()
+//    private val _shoeDataList = MutableLiveData<List<Shoe>>()
+    private val _shoeDataList = mutableListOf<Shoe>()
+    val shoeDataList : MutableList<Shoe>
+        get() {
+            return _shoeDataList
+        }
+
     private val _shoeData = MutableLiveData<List<Shoe>>()
-    val shoeData : LiveData<List<Shoe>>
+    val shoeData : MutableLiveData<List<Shoe>>
         get() {
             return _shoeData
         }
-
-//    private val _shoeData = MutableLiveData<Shoe>()
-//    val shoeData : LiveData<Shoe>
-//        get() {
-//            return _shoeData
-//        }
 
     private val _eventSave = MutableLiveData<Boolean>()
     val eventSave: LiveData<Boolean>
@@ -39,14 +40,14 @@ class ShoeStoreViewModel: ViewModel() {
         Timber.d("ShoeListViewModel destroyed ")
     }
 
-    //sample method to add shoe
     fun addShoe(shoe: Shoe) {
-//        _shoeData.value = shoe
-        shoesList.add(shoe)
-    }
 
-    fun onSave() {
         _eventSave.value = true
+
+        _shoeDataList.add(shoe)         // step 1
+
+        _shoeData.value = _shoeDataList // step 2
+
     }
 
     fun onSaveComplete() {
