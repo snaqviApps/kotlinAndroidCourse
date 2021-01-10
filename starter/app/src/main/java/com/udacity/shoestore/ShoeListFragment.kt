@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
@@ -19,43 +20,57 @@ import timber.log.Timber
 
 class ShoeListFragment : Fragment() {
 
-    private lateinit var shoeObj: Shoe
     private val viewModelList: ShoeStoreViewModel by activityViewModels()
+
+    private lateinit var shoeItemBinding: FragmentShoeListBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       val bindingList: FragmentShoeListBinding = DataBindingUtil.inflate(
+       shoeItemBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_shoe_list, container, false
        )
 
         Timber.d("called ViewModelProvider()%s", "")
 
-        bindingList.sStoreViewModelList = viewModelList
+        var linearLayout = R.id.listLinearLayout
+//        val linearLayout = R.layout.fragment_shoe_
 
-        /**  apparently the MainActivity is right place, but put here as well */
-        bindingList.lifecycleOwner = this
-//        bindingList.setLifecycleOwner(this.viewLifecycleOwner)
+        shoeItemBinding.sStoreViewModelList = viewModelList
+        shoeItemBinding.lifecycleOwner = this
 
-        viewModelList.shoeDataList.forEach { newShoe ->
-//            var count = count + 1
-            Timber.d("")
-        }
-
-        viewModelList.shoeData.observe(this.viewLifecycleOwner, Observer { shoeReceived ->
+//        viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, Observer { cancelSaving ->
+        viewModelList.shoeData.observe(this.viewLifecycleOwner, { shoeReceived ->
             if(shoeReceived != null){
 
+                shoeReceived.forEach { shoeItem ->
+                    Timber.d("shoe size received in listFrag is: %s", shoeItem.size)
+
+                    // add each list member to a new LinearLayout
+
+
+                    val shoeItemBinding = FragmentShoeListBinding.inflate(
+                        layoutInflater,
+                        null,
+                        false
+                    )
+                    shoeItemBinding.shoe = shoeItem
+                    shoeItemBinding.listLinearLayout.addView(shoeItemBinding.root)
+                }
+
                 Timber.d("shoe size received in listFrag is: %s", shoeReceived.size)
+
             }
         })
 
-        bindingList.buFab.setOnClickListener {           // navigation 1st - method
+        shoeItemBinding.buFab.setOnClickListener {           // navigation 1st - method
             it.findNavController().navigate(
                 R.id.action_shoeListFragment_to_shoeDetailFragment)
         }
 
-        return bindingList.root
+        return shoeItemBinding.root
     }
 
 }

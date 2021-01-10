@@ -10,12 +10,11 @@ import timber.log.Timber
 class ShoeStoreViewModel: ViewModel() {
 
 //     Shoe - model internal
-//    private val _shoeDataList = MutableLiveData<List<Shoe>>()
     private val _shoeDataList = mutableListOf<Shoe>()
-    val shoeDataList : MutableList<Shoe>
-        get() {
-            return _shoeDataList
-        }
+//    val shoeDataList : MutableList<Shoe>
+//        get() {
+//            return _shoeDataList
+//        }
 
     private val _shoeData = MutableLiveData<List<Shoe>>()
     val shoeData : MutableLiveData<List<Shoe>>
@@ -45,7 +44,6 @@ class ShoeStoreViewModel: ViewModel() {
         _eventSave.value = true
 
         _shoeDataList.add(shoe)         // step 1
-
         _shoeData.value = _shoeDataList // step 2
 
     }

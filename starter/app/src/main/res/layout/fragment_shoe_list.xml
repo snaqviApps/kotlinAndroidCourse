@@ -20,21 +20,14 @@
         tools:context=".ShoeListFragment">
 
         <LinearLayout
+            android:id="@+id/listLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/layout_wide"
             android:layout_margin="@dimen/layout_margin"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:text="@string/tv_text_shoeList_sample_text"
-                style="@style/EmailStyle"
-                android:layout_marginBottom="16dp"
-                />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
