@@ -14,32 +14,32 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.udacity.shoestore.databinding.FragmentShoeListBinding
+import com.udacity.shoestore.databinding.ItemShoeBinding
 import com.udacity.shoestore.models.Shoe
 import timber.log.Timber
 
 
 class ShoeListFragment : Fragment() {
 
+    private lateinit var shoeItem: Shoe
+
     private val viewModelList: ShoeStoreViewModel by activityViewModels()
 
-    private lateinit var shoeItemBinding: FragmentShoeListBinding
+    private lateinit var shoeListBinding: FragmentShoeListBinding
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       shoeItemBinding = DataBindingUtil.inflate(
+        shoeListBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_shoe_list, container, false
        )
 
         Timber.d("called ViewModelProvider()%s", "")
 
-        var linearLayout = R.id.listLinearLayout
-//        val linearLayout = R.layout.fragment_shoe_
-
-        shoeItemBinding.sStoreViewModelList = viewModelList
-        shoeItemBinding.lifecycleOwner = this
+        shoeListBinding.sStoreViewModelList = viewModelList
+        shoeListBinding.lifecycleOwner = this
 
 //        viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, Observer { cancelSaving ->
         viewModelList.shoeData.observe(this.viewLifecycleOwner, { shoeReceived ->
@@ -51,13 +51,14 @@ class ShoeListFragment : Fragment() {
                     // add each list member to a new LinearLayout
 
 
-                    val shoeItemBinding = FragmentShoeListBinding.inflate(
+                    val shoeItemBinding = ItemShoeBinding.inflate(
                         layoutInflater,
                         null,
                         false
                     )
-                    shoeItemBinding.shoe = shoeItem
-                    shoeItemBinding.listLinearLayout.addView(shoeItemBinding.root)
+                    shoeItemBinding.shoeToList = shoeItem
+//                    shoeItemBinding.listLinearLayout.addView(shoeItemBinding.root)
+                    shoeListBinding.listLinearLayout.addView(shoeItemBinding.root)
                 }
 
                 Timber.d("shoe size received in listFrag is: %s", shoeReceived.size)
@@ -65,12 +66,12 @@ class ShoeListFragment : Fragment() {
             }
         })
 
-        shoeItemBinding.buFab.setOnClickListener {           // navigation 1st - method
+        shoeListBinding.buFab.setOnClickListener {           // navigation 1st - method
             it.findNavController().navigate(
                 R.id.action_shoeListFragment_to_shoeDetailFragment)
         }
 
-        return shoeItemBinding.root
+        return shoeListBinding.root
     }
 
 }

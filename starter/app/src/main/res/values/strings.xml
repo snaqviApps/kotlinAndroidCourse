@@ -5,8 +5,11 @@
     <string name="email">Email: </string>
     <string name="password">Password: </string>
     <string name="shoeName">Shoe Name: </string>
+    <string name="shoeListName">Name: </string>
     <string name="shoeCompany">Shoe Company: </string>
+    <string name="shoeListCompany">Company: </string>
     <string name="shoeSize">Shoe Size: </string>
+    <string name="shoeListSize">Size: </string>
     <string name="shoeDescription">Description: </string>
 
     <string name="bu_new_login_label">New login</string>
@@ -24,4 +27,5 @@
     <string name="buttonSave">Save</string>
     <string name="buttonCancel">cancel</string>
     <string name="size_format">%f</string>
+    <string name="shoeListDescription">Description</string>
 </resources>

@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="shoeToList"
+            type="com.udacity.shoestore.models.Shoe" />
+        <variable
             name="sStoreViewModelList"
             type="com.udacity.shoestore.ShoeStoreViewModel" />
     </data>
