@@ -16,7 +16,6 @@ import timber.log.Timber
 
 class ShoeDetailFragment : Fragment() {
 
-//    private var shoeObj: Shoe = Shoe("", 0.00, "", "", null)
 
     private val viewModelDetails: ShoeStoreViewModel by activityViewModels()
     override fun onCreateView(
@@ -32,6 +31,7 @@ class ShoeDetailFragment : Fragment() {
         )
 
 //        bindingDetails.newShoe = shoeObj                    // causes data-lost when configuration change
+//        if(bindingDetails.newShoe == null)
         bindingDetails.newShoe = viewModelDetails.shoeDetailsObj
 
         bindingDetails.shoeStoreViewModel = viewModelDetails
@@ -40,6 +40,8 @@ class ShoeDetailFragment : Fragment() {
         viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer { saveNewShoe ->
             if (saveNewShoe) {
                 findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
+
+                bindingDetails.newShoe = null
                 viewModelDetails.onSaveComplete()
             }
         })

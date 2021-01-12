@@ -1,6 +1,5 @@
 package com.udacity.shoestore
 
-import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +8,9 @@ import timber.log.Timber
 
 class ShoeStoreViewModel: ViewModel() {
 
-    private val _shoeDetailsObj = Shoe("",0.0,"","")
-    val shoeDetailsObj:Shoe = _shoeDetailsObj
+//    private val _shoeDetailsObj = Shoe("",0.0,"","")
+//    var shoeDetailsObj:Shoe = _shoeDetailsObj
+    var shoeDetailsObj:Shoe = Shoe("",0.0,"","")
 
     private val _shoeDataList = mutableListOf<Shoe>()
     private val _shoeData = MutableLiveData<List<Shoe>>()
@@ -42,6 +42,8 @@ class ShoeStoreViewModel: ViewModel() {
 
         _shoeDataList.add(shoe)
         _shoeData.value = _shoeDataList
+        if(_shoeDataList.size != 0)
+            shoeDetailsObj= Shoe("",0.0,"","")
 
     }
 
