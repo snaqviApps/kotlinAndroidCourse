@@ -36,37 +36,24 @@ class ShoeListFragment : Fragment() {
             inflater, R.layout.fragment_shoe_list, container, false
        )
 
-        Timber.d("called ViewModelProvider()%s", "")
-
         shoeListBinding.sStoreViewModelList = viewModelList
         shoeListBinding.lifecycleOwner = this
 
-//        viewModelDetails.eventCancel.observe(this.viewLifecycleOwner, Observer { cancelSaving ->
         viewModelList.shoeData.observe(this.viewLifecycleOwner, { shoeReceived ->
             if(shoeReceived != null){
-
                 shoeReceived.forEach { shoeItem ->
-                    Timber.d("shoe size received in listFrag is: %s", shoeItem.size)
-
-                    // add each list member to a new LinearLayout
-
-
                     val shoeItemBinding = ItemShoeBinding.inflate(
                         layoutInflater,
                         null,
                         false
                     )
                     shoeItemBinding.shoeToList = shoeItem
-//                    shoeItemBinding.listLinearLayout.addView(shoeItemBinding.root)
                     shoeListBinding.listLinearLayout.addView(shoeItemBinding.root)
                 }
-
-                Timber.d("shoe size received in listFrag is: %s", shoeReceived.size)
-
             }
         })
 
-        shoeListBinding.buFab.setOnClickListener {           // navigation 1st - method
+        shoeListBinding.buFab.setOnClickListener {
             it.findNavController().navigate(
                 R.id.action_shoeListFragment_to_shoeDetailFragment)
         }

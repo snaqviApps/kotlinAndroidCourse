@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class ShoeDetailFragment : Fragment() {
 
-    private var shoeObj: Shoe = Shoe("", 0.00, "", "", null)
+//    private var shoeObj: Shoe = Shoe("", 0.00, "", "", null)
 
     private val viewModelDetails: ShoeStoreViewModel by activityViewModels()
     override fun onCreateView(
@@ -31,14 +31,11 @@ class ShoeDetailFragment : Fragment() {
             false
         )
 
-        bindingDetails.newShoe = shoeObj
+//        bindingDetails.newShoe = shoeObj                    // causes data-lost when configuration change
+        bindingDetails.newShoe = viewModelDetails.shoeDetailsObj
+
         bindingDetails.shoeStoreViewModel = viewModelDetails
-        /**  apparently the MainActivity is right place, but put here as well */
-//        bindingDetails.lifecycleOwner = this
-
         bindingDetails.lifecycleOwner = this.viewLifecycleOwner
-
-        Timber.d("inside detailsFragment")
 
         viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer { saveNewShoe ->
             if (saveNewShoe) {
