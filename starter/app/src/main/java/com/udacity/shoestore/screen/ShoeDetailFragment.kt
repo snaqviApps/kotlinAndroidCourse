@@ -35,8 +35,7 @@ class ShoeDetailFragment : Fragment() {
         bindingDetails.lifecycleOwner = this.viewLifecycleOwner
         viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer { saveNewShoe ->
             if (saveNewShoe) {
-                findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
-
+                findNavController().navigateUp()
                 bindingDetails.newShoe = null
                 viewModelDetails.onSaveComplete()
             }
