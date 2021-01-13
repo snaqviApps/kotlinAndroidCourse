@@ -1,18 +1,18 @@
-package com.udacity.shoestore
+package com.udacity.shoestore.screen
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.udacity.shoestore.R
+//import com.udacity.shoestore.ShoeDetailFragmentDirections
+import com.udacity.shoestore.ShoeStoreViewModel
 import com.udacity.shoestore.databinding.FragmentShoeDetailBinding
-import com.udacity.shoestore.models.Shoe
-import timber.log.Timber
 
 class ShoeDetailFragment : Fragment() {
 
@@ -29,14 +29,10 @@ class ShoeDetailFragment : Fragment() {
             container,
             false
         )
-
-//        bindingDetails.newShoe = shoeObj                    // causes data-lost when configuration change
-//        if(bindingDetails.newShoe == null)
         bindingDetails.newShoe = viewModelDetails.shoeDetailsObj
 
         bindingDetails.shoeStoreViewModel = viewModelDetails
         bindingDetails.lifecycleOwner = this.viewLifecycleOwner
-
         viewModelDetails.eventSave.observe(this.viewLifecycleOwner, Observer { saveNewShoe ->
             if (saveNewShoe) {
                 findNavController().navigate(ShoeDetailFragmentDirections.actionShoeDetailFragmentToShoeListFragment())
@@ -51,7 +47,6 @@ class ShoeDetailFragment : Fragment() {
                 viewModelDetails.onCancelComplete()
             }
         })
-
         return bindingDetails.root
     }
 

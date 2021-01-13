@@ -33,7 +33,7 @@
         app:navGraph="@navigation/navigation"
         app:defaultNavHost="true"
         />
-    <!--        android:name="com.udacity.shoestore.MainFragment"-->
+    <!--        android:name="com.udacity.shoestore.screen.MainFragment"-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

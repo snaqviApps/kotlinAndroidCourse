@@ -6,7 +6,7 @@
     app:startDestination="@id/mainFragment">
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.udacity.shoestore.MainFragment"
+        android:name="com.udacity.shoestore.screen.MainFragment"
         tools:layout="@layout/fragment_main"
         android:label="MainFragment" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="com.udacity.shoestore.WelcomeFragment"
+        android:name="com.udacity.shoestore.screen.WelcomeFragment"
         tools:layout="@layout/fragment_welcome"
         android:label="WelcomeFragment" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/instructionsFragment"
-        android:name="com.udacity.shoestore.InstructionsFragment"
+        android:name="com.udacity.shoestore.screen.InstructionsFragment"
         android:label="InstructionsFragment"
         tools:layout="@layout/fragment_instructions">
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/shoeListFragment"
-        android:name="com.udacity.shoestore.ShoeListFragment"
+        android:name="com.udacity.shoestore.screen.ShoeListFragment"
         android:label="ShoeListFragment"
         tools:layout="@layout/fragment_shoe_list">
         <action
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/shoeDetailFragment"
-        android:name="com.udacity.shoestore.ShoeDetailFragment"
+        android:name="com.udacity.shoestore.screen.ShoeDetailFragment"
         android:label="ShoeDetailFragment"
         tools:layout="@layout/fragment_shoe_detail">
         <action

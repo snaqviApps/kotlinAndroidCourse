@@ -8,10 +8,7 @@ import timber.log.Timber
 
 class ShoeStoreViewModel: ViewModel() {
 
-//    private val _shoeDetailsObj = Shoe("",0.0,"","")
-//    var shoeDetailsObj:Shoe = _shoeDetailsObj
     var shoeDetailsObj:Shoe = Shoe("",0.0,"","")
-
     private val _shoeDataList = mutableListOf<Shoe>()
     private val _shoeData = MutableLiveData<List<Shoe>>()
     val shoeData : MutableLiveData<List<Shoe>>
@@ -37,14 +34,11 @@ class ShoeStoreViewModel: ViewModel() {
     }
 
     fun addShoe(shoe: Shoe) {
-
         _eventSave.value = true
-
         _shoeDataList.add(shoe)
         _shoeData.value = _shoeDataList
         if(_shoeDataList.size != 0)
             shoeDetailsObj= Shoe("",0.0,"","")
-
     }
 
     fun onSaveComplete() {
